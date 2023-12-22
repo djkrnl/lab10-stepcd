@@ -40,3 +40,4 @@ PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-ste
 ✓ Set Actions secret DOCKER_HUB_USERNAME for djkrnl/lab10-stepcd
 PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> gh secret set DOCKER_HUB_ACCESS_TOKEN --body "dckr_pat_***"
 ✓ Set Actions secret DOCKER_HUB_ACCESS_TOKEN for djkrnl/lab10-stepcd
+// Uruchomienie workflow lab10-workflow-stepcd
