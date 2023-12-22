@@ -41,3 +41,7 @@ PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-ste
 PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> gh secret set DOCKER_HUB_ACCESS_TOKEN --body "dckr_pat_***"
 ✓ Set Actions secret DOCKER_HUB_ACCESS_TOKEN for djkrnl/lab10-stepcd
 // Uruchomienie workflow lab10-workflow-stepcd
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> gh workflow run lab10-workflow-stepcd.yml 
+✓ Created workflow_dispatch event for lab10-workflow-stepcd.yml at main
+
+To see runs for this workflow, try: gh run list --workflow=lab10-workflow-stepcd.yml
