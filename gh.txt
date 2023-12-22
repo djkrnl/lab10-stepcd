@@ -35,3 +35,8 @@ Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
 To https://github.com/djkrnl/lab10-stepcd.git
  * [new branch]      main -> main
 branch 'main' set up to track 'origin/main'.
+// Ustawianie sekretów DockerHub w repozytorium
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> gh secret set DOCKER_HUB_USERNAME --body "djkrnl"    
+✓ Set Actions secret DOCKER_HUB_USERNAME for djkrnl/lab10-stepcd
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> gh secret set DOCKER_HUB_ACCESS_TOKEN --body "dckr_pat_***"
+✓ Set Actions secret DOCKER_HUB_ACCESS_TOKEN for djkrnl/lab10-stepcd

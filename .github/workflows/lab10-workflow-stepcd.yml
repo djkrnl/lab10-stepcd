@@ -1,0 +1,37 @@
+# Nazwa workflow
+name: lab10-workflow-stepcd
+# Określenie sposobu uruchamiania workflow - manualny
+on: workflow_dispatch
+# Zadania uruchamiane przez workflow
+jobs:
+  # Zadanie odpowiedzialne za przesyłanie obrazu na DockerHub
+  dockerCI:
+    # Określenie systemu, na którym będzie działał workflow
+    runs-on: ubuntu-latest
+    steps:
+      # Akcja przypisująca workflow do repozytorium Source repo
+      - id: checkout
+        uses: actions/checkout@v4
+      # Akcja instalująca i konfigurująca QEMU
+      - id: qemu
+        uses: docker/setup-qemu-action@v3
+      # Akcja instalująca i konfigurująca Buildx
+      - id: buildx
+        uses: docker/setup-buildx-action@v3
+      # Logowanie na Docker Hub za pomocą nazwy użytkownika i tokenu dostępu znajdujących się w repozytorium jako tzw. sekrety
+      - id: docker_login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      # Budowanie i publikacja gotowego obrazu na Docker Hub - repozytorium zad2gitops, tag określający wersję, platforma amd64, eksport cache
+      - id: docker_build
+        uses: docker/build-push-action@v5
+        with:
+          context: ./
+          platforms: linux/amd64
+          file: ./Dockerfile
+          push: true
+          tags: djkrnl/zad2gitops:v1
+          cache-from: type=registry,ref=djkrnl/zad2gitops:v1
+          cache-to: type=inline
