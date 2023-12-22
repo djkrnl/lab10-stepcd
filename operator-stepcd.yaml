@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+# podstawowe dane zadania
+metadata:
+  name: stepcd
+# specyfikacja zadania
+spec:
+  # definicja sposobu wywoływania zadania (co 2 minuty)
+  schedule: "*/2 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+    backoffLimit: 0
+    template:
+      spec:
+        restartPolicy: Never
+        # nazwa konta usługi, które będzie wykorzystywane do wykonywania zadania
+        serviceAccountName: gitops
+        # definicja kontenera wykonywanego w ramach zadania (nazwa zad2gitops, przygotowany obraz Dockera z DockerHub)
+        containers:
+          - name: zad2gitops 
+            image: djkrnl/zad2gitops:v1
+            command: [sh, -e, -c]
+            # komendy wykonywane w ramach zadania (klonowanie repozytorium Config repo, wyszukiwanie wszystkich plików YAML i tworzenie elementów klastra na ich podstawie)
+            args:
+              - git clone https://github.com/djkrnl/lab10-config.git /temp/lab10-config && find /tmp/lab10-config -name '*.yaml' -exec kubectl apply -f {} \

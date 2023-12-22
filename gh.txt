@@ -1,0 +1,17 @@
+// Utworzenie repozytorium GitHub
+C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie>gh repo create
+? What would you like to do? Create a new repository on GitHub from scratch
+? Repository name lab10-stepcd
+
+? Repository name lab10-stepcd
+? Description Repozytorium StepCD
+
+? Description Repozytorium StepCD
+? Visibility Public
+? Would you like to add a README file? No
+? Would you like to add a .gitignore? No
+? Would you like to add a license? No
+? This will create "lab10-stepcd" as a public repository on GitHub. Continue? Yes
+✓ Created repository djkrnl/lab10-stepcd on GitHub
+? Clone the new repository locally? Yes
+// Przesłanie plików na repozytorium - commit i push
