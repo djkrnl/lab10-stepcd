@@ -45,3 +45,10 @@ PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-ste
 ✓ Created workflow_dispatch event for lab10-workflow-stepcd.yml at main
 
 To see runs for this workflow, try: gh run list --workflow=lab10-workflow-stepcd.yml
+
+// Terminal - utworzenie konta usługi gitops
+djkrnl@djkrnl-VirtualBox:~$ kubectl create sa gitops 
+serviceaccount/gitops created
+djkrnl@djkrnl-VirtualBox:~$ kubectl create clusterrolebinding gitops-admin --clusterrole=cluster-admin --serviceaccount default:gitops
+clusterrolebinding.rbac.authorization.k8s.io/gitops-admin created
+
