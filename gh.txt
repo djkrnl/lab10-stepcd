@@ -15,3 +15,23 @@ C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie>gh repo crea
 ✓ Created repository djkrnl/lab10-stepcd on GitHub
 ? Clone the new repository locally? Yes
 // Przesłanie plików na repozytorium - commit i push
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> git add .
+warning: in the working copy of 'operator-stepcd.yaml', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> git commit -m "v1"
+[master (root-commit) 2c54658] v1
+ 3 files changed, 57 insertions(+)
+ create mode 100644 Dockerfile
+ create mode 100644 gh.txt
+ create mode 100644 operator-stepcd.yaml
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> git branch -M main
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> git remote add origin https://github.com/djkrnl/lab10-stepcd.git
+PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-stepcd> git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.49 KiB | 1.49 MiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/djkrnl/lab10-stepcd.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
