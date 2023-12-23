@@ -46,9 +46,73 @@ PS C:\Users\Kornel\Desktop\POLITECHNIKA\LABORATORIA\PF-SwCO\10\zadanie\lab10-ste
 
 To see runs for this workflow, try: gh run list --workflow=lab10-workflow-stepcd.yml
 
+// Krok 3b
 // Terminal - utworzenie konta usługi gitops
 djkrnl@djkrnl-VirtualBox:~$ kubectl create sa gitops 
 serviceaccount/gitops created
 djkrnl@djkrnl-VirtualBox:~$ kubectl create clusterrolebinding gitops-admin --clusterrole=cluster-admin --serviceaccount default:gitops
 clusterrolebinding.rbac.authorization.k8s.io/gitops-admin created
+// Terminal - utworzenie CronJob stepcd na podstawie pliku YAML
+djkrnl@djkrnl-VirtualBox:~$ kubectl apply -f operator-stepcd.yaml
+cronjob.batch/stepcd created
+// Sprawdzenie działania CronJob
+djkrnl@djkrnl-VirtualBox:~$ kubectl get all
+NAME                        READY   STATUS      RESTARTS   AGE
+pod/stepcd-28388196-crbkd   0/1     Completed   0          8s
 
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   37s
+
+NAME                   SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/stepcd   */2 * * * *   False     0        8s              35s
+
+NAME                        COMPLETIONS   DURATION   AGE
+job.batch/stepcd-28388196   1/1           4s         8s
+djkrnl@djkrnl-VirtualBox:~$ kubectl logs stepcd-28388196-crbkd
+Cloning into '/temp/lab10-config'...
+namespace/lab10 created
+service/lab10-service created
+ingress.networking.k8s.io/lab10-ingress created
+deployment.apps/lab10-deployment created
+
+// Opis CronJob stepcd
+djkrnl@djkrnl-VirtualBox:~$ kubectl describe cronjob.batch stepcd
+Name:                          stepcd
+Namespace:                     default
+Labels:                        <none>
+Annotations:                   <none>
+Schedule:                      */2 * * * *
+Concurrency Policy:            Forbid
+Suspend:                       False
+Successful Job History Limit:  3
+Failed Job History Limit:      1
+Starting Deadline Seconds:     <unset>
+Selector:                      <unset>
+Parallelism:                   <unset>
+Completions:                   <unset>
+Pod Template:
+  Labels:           <none>
+  Service Account:  gitops
+  Containers:
+   zad2gitops:
+    Image:      djkrnl/zad2gitops:v1
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      sh
+      -e
+      -c
+    Args:
+      git clone https://github.com/djkrnl/lab10-config.git /temp/lab10-config && find /temp/lab10-config -name '*.yml' -exec kubectl apply -f {} \;
+    Environment:     <none>
+    Mounts:          <none>
+  Volumes:           <none>
+Last Schedule Time:  Sat, 23 Dec 2023 17:04:00 +0100
+Active Jobs:         <none>
+Events:
+  Type    Reason            Age                 From                Message
+  ----    ------            ----                ----                -------
+  Normal  SuccessfulCreate  59m                 cronjob-controller  Created job stepcd-28389066
+  Normal  SuccessfulCreate  57m                 cronjob-controller  Created job stepcd-28389068
+  Normal  SuccessfulCreate  51m                 cronjob-controller  Created job stepcd-28389074
+  Normal  SuccessfulCreate  68s (x25 over 49m)  cronjob-controller  (combined from similar events): Created job stepcd-28389124
